@@ -1,0 +1,209 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-06-24 14:47+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin.py:23
+msgid "Informations sur la conférence : "
+msgstr ""
+
+#: admin.py:24
+msgid ""
+"La conférence ouvrira dans moins 24h, le mot de passe pour y accéder est le "
+"suivant : "
+msgstr ""
+
+#: admin.py:29
+msgid ""
+"Envoyer un mail aux participants à la(les) conférence(s) sélectionnée(s)"
+msgstr ""
+
+#: cms_app.py:7
+msgid "BigBlueButton App"
+msgstr ""
+
+#: models.py:26
+msgid "name"
+msgstr "nom"
+
+#: models.py:27
+msgid "The name of the meeting."
+msgstr "Le nom de la conférence."
+
+#: models.py:31
+msgid "Unique number"
+msgstr "Numéro unique"
+
+#: models.py:32
+msgid "The meeting number which need to be unique."
+msgstr "Le numéro de la conférence qui doit être unique."
+
+#: models.py:36
+msgid "Attendee password"
+msgstr "Mot de passe participant"
+
+#: models.py:37
+msgid "The password which will sent to attendees."
+msgstr "Le mot de passe qui sera envoyé aux participants."
+
+#: models.py:41
+msgid "Moderator password"
+msgstr "Mot de passe modérateur"
+
+#: models.py:42
+msgid "The password for meeting's moderator."
+msgstr "Le mot de passe pour le modérateur de la conférence."
+
+#: models.py:46
+msgid "Welcome message"
+msgstr "Message d'accueil"
+
+#: models.py:47
+msgid "Message which displayed on the chat window."
+msgstr "Le message qui sera affiché dans la fenêtre de tchat."
+
+#: models.py:51
+msgid "Logout URL"
+msgstr "URL de déconnexion"
+
+#: models.py:52
+msgid "URL to which users will be redirected."
+msgstr "L'URL vers laquelle les utilisateurs seront redirigés."
+
+#: models.py:84 templates/django_bigbluebutton/meetings.html:50
+msgid "Mail address"
+msgstr "Adresse mail"
+
+#: models.py:85
+msgid "Mail where informations will be sent."
+msgstr "Mail ou les informations seront envoyées."
+
+#: models.py:88 templates/django_bigbluebutton/meetings.html:57
+msgid "Last name"
+msgstr "Nom"
+
+#: models.py:89
+msgid "Attendee last name."
+msgstr "Nom du participant."
+
+#: models.py:92 templates/django_bigbluebutton/meetings.html:64
+msgid "First name"
+msgstr "Prénom"
+
+#: models.py:93
+msgid "Attendee first name."
+msgstr "Prénom du participant."
+
+#: models.py:96
+msgid "Company name"
+msgstr "Nom de la société"
+
+#: models.py:97
+msgid "Attendee company name."
+msgstr "Nom de la société du participant."
+
+#: models.py:100 templates/django_bigbluebutton/meetings.html:71
+msgid "Phone number"
+msgstr "Numéro de téléphone"
+
+#: models.py:101
+msgid "Attendee phone number."
+msgstr "Numéro de téléphone du participant."
+
+#: models.py:106
+msgid "List of meetings that the user is registered."
+msgstr "La liste des conférences auxquelles l'utilisateur est enregistré."
+
+#: views.py:87
+msgid "Inscription à la conférence : "
+msgstr ""
+
+#: views.py:89
+msgid "Merci de vous être inscrit à cette conférence. "
+msgstr ""
+
+#: views.py:90
+msgid "Vous serez informé par mail 24h avant le début de celle-ci."
+msgstr ""
+
+#: templates/django_bigbluebutton/meetings.html:7
+msgid "Retrieving the list of meetings : "
+msgstr "Récupération de la liste des conférences : "
+
+#: templates/django_bigbluebutton/meetings.html:7
+msgid "Failure"
+msgstr "Echec"
+
+#: templates/django_bigbluebutton/meetings.html:11
+msgid "List of meetings"
+msgstr "Liste des conférences"
+
+#: templates/django_bigbluebutton/meetings.html:15
+msgid "Name of the meeting"
+msgstr "Nom de la conférence"
+
+#: templates/django_bigbluebutton/meetings.html:16
+msgid "State of the meeting"
+msgstr "État de la conférence"
+
+#: templates/django_bigbluebutton/meetings.html:17
+#: templates/django_bigbluebutton/meetings.html:88
+msgid "Register"
+msgstr "Enregistrement"
+
+#: templates/django_bigbluebutton/meetings.html:18
+#: templates/django_bigbluebutton/meetings.html:126
+msgid "Join"
+msgstr "Rejoindre"
+
+#: templates/django_bigbluebutton/meetings.html:22
+msgid "Running"
+msgstr "Démarrée"
+
+#: templates/django_bigbluebutton/meetings.html:22
+msgid "Not running"
+msgstr "Non démarrée"
+
+#: templates/django_bigbluebutton/meetings.html:23
+#: templates/django_bigbluebutton/meetings.html:45
+msgid "Register to meeting"
+msgstr "S'enregistrer à la conférence"
+
+#: templates/django_bigbluebutton/meetings.html:29
+#: templates/django_bigbluebutton/meetings.html:100
+msgid "Join the meeting"
+msgstr "Rejoindre la conférence"
+
+#: templates/django_bigbluebutton/meetings.html:36
+msgid "No meeting available."
+msgstr "Pas de conférence disponible."
+
+#: templates/django_bigbluebutton/meetings.html:78
+msgid "Company"
+msgstr "Société"
+
+#: templates/django_bigbluebutton/meetings.html:105
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: templates/django_bigbluebutton/meetings.html:112
+msgid "Password"
+msgstr "Mot de passe"
+
+#: templates/django_bigbluebutton/meetings.html:121
+msgid "Wrong password."
+msgstr "Mot de passe erroné."
