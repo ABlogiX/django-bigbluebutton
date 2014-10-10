@@ -1,0 +1,16 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<p>{% trans "Customize the content of the mail which will be send." %}</p>
+
+<form action="" method="post">{% csrf_token %}
+
+    {{ mail_form }}
+
+    <input type="hidden" name="action" value="send_inscription_mail" />
+    <input type="submit" name="send_mail" value="Send mail" />
+</form>
+
+{% endblock %}
