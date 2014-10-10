@@ -34,15 +34,19 @@ class Meeting(models.Model):
         help_text=_('The meeting number which need to be unique.'),
         unique=True, default=get_unique_id)
 
+    date = models.DateTimeField(
+        _("Schedule on"),
+        help_text=_("The date and time the meeting will be."))
+
     attendee_pw = models.CharField(
         _('Attendee password'),
         help_text=_('The password which will sent to attendees.'),
-        max_length=50, blank=True)
+        max_length=50, blank=True) # True because bbb will generate one if empty
 
     moderator_pw = models.CharField(
         _('Moderator password'),
         help_text=_("The password for meeting's moderator."),
-        max_length=50, blank=True)
+        max_length=50, blank=True) # True because bbb will generate one if empty
 
     welcome_message = models.CharField(
         _('Welcome message'),
