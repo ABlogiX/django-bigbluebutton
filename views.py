@@ -92,12 +92,14 @@ class MeetingSubscriptionView(View):
                     Meeting.objects.get(unique_id=int(meeting_id))
                 )
 
-            subject = _('Inscription à la conférence : ')
-            subject += Meeting.objects.get(unique_id=int(meeting_id)).name
-            content = _('Merci de vous être inscrit à cette conférence. ')
-            content += _('Vous serez informé par mail 24h avant le début de celle-ci.')
+            subject = _("Subscription to the meeting : {}"
+                        .format(Meeting.objects.get(unique_id=int(meeting_id)).name))
 
-            send_mail(subject, content, 'alexandre.papin72@gmail.com',
+            content = _("Thank you to subscribed to this meetings.\n"
+                        "You will receive a mail one day before the meeting begins.\n\n"
+                        "The ABlogiX team.")
+
+            send_mail(subject, content, settings.EMAIL_HOST_USER,
                       [user.mail, ], fail_silently=False)
 
         return render(request, self.template_name, locals())
