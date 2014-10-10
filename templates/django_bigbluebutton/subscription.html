@@ -1,0 +1,52 @@
+{% extends 'django_bigbluebutton/base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form action="{% url 'meeting_subscription' meeting_id %}" method="post">{% csrf_token %}
+                <div class="input-group">
+                  <span class="input-group-addon">{% trans "Mail address" %}</span>
+                    {{ registered_user_form.mail }}
+                    {% if registered_user_form.mail.errors %}
+                        <span class="input-group-addon error">{{ registered_user_form.mail.errors }}</span>
+                    {% endif %}
+                </div><br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">{% trans "Last name" %}</span>
+                    {{ registered_user_form.last_name }}
+                    {% if registered_user_form.last_name.errors %}
+                        <span class="input-group-addon error">{{ registered_user_form.last_name.errors }}</span>
+                    {% endif %}
+                </div><br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">{% trans "First name" %}</span>
+                    {{ registered_user_form.first_name }}
+                    {% if registered_user_form.first_name.errors %}
+                        <span class="input-group-addon error">{{ registered_user_form.first_name.errors }}</span>
+                    {% endif %}
+                </div><br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">{% trans "Phone number" %}</span>
+                    {{ registered_user_form.phone_number }}
+                    {% if registered_user_form.phone_number.errors %}
+                        <span class="input-group-addon error">{{ registered_user_form.phone_number.errors }}</span>
+                    {% endif %}
+                </div><br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">{% trans "Company" %}</span>
+                    {{ registered_user_form.company }}
+                    {% if registered_user_form.company.errors %}
+                        <span class="input-group-addon error">{{ registered_user_form.company.errors }}</span>
+                    {% endif %}
+                </div><br />
+
+                <button type="submit" name="subscribe_meeting" class="btn btn-primary">{% trans "Register" %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
