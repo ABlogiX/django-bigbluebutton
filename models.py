@@ -9,6 +9,8 @@ from cms.models import CMSPlugin
 
 from django_bigbluebutton.bbb_api import getMeetings, createMeeting, endMeeting
 
+from random import randrange
+
 
 def delete_meeting_in_bigbluebutton(sender, instance, *args, **kwargs):
     endMeeting(instance.unique_id, instance.moderator_pw,
@@ -19,7 +21,7 @@ class Meeting(models.Model):
 
     def get_unique_id():
         if Meeting.objects.all().count() == 0:
-            return 1
+            return randrange(100000, 1000000)
         else:
             return Meeting.objects.latest('id').unique_id + 1
 
@@ -104,6 +106,22 @@ class RegisteredUser(models.Model):
     meetings = models.ManyToManyField(
         Meeting,
         verbose_name=_('List of meetings that the user is registered.')
+    )
+
+    def __str__(self):
+        return self.mail
+
+
+class PreRegisteredUser(models.Model):
+    mail = models.EmailField(
+        _('Mail address'),
+        help_text=_('Mail where informations will be sent.')
+    )
+
+    meetings = models.ManyToManyField(
+        Meeting,
+        verbose_name=_('List of meetings that the user is registered.'),
+        blank=True
     )
 
     def __str__(self):
