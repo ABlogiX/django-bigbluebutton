@@ -26,12 +26,11 @@ class MeetingAdmin(admin.ModelAdmin):
                 mails.append(user.mail)
 
             subject = _("Informations for the meeting : {}".format(meeting.name))
-            content = _("The meeting will begin the meeting.date at meeting.time\n\n"
+            content = _("The meeting will begin the {} GMT+1 (Paris time).\n\n"
                         "To join the meeting, follow this link : "
                         "http://{}/{}/{}/{}\n\n"
                         "You can join the meeting using this password : {}"
-                        .format(#meeting.date, meeting.time,
-                                Site.objects.get_current().domain,
+                        .format(meeting.date, Site.objects.get_current().domain,
                                 settings.DJANGO_BBB_BASE_URL, meeting.unique_id,
                                 settings.DJANGO_BBB_CONNECTION_URL,
                                 meeting.attendee_pw))
@@ -54,10 +53,11 @@ class MeetingAdmin(admin.ModelAdmin):
 
             subject = _("Subscription link to the meeting : {}".format(meeting.name))
             content = _("Hello,\n"
-                        "We send you an email because we think you can be interested in this meeting.\n"
+                        "We send you an email because we think you can be interested "
+                        "in this meeting which will be the {}. GMT+1 (Paris time)\n"
                         "If you want to subscribe, follow this link :"
                         "http://{}/{}/{}/{}\n"
-                        .format(Site.objects.get_current().domain,
+                        .format(meeting.date, Site.objects.get_current().domain,
                                 settings.DJANGO_BBB_BASE_URL, meeting.unique_id,
                                 settings.DJANGO_BBB_SUBSCRIPTION_URL))
 
