@@ -14,9 +14,15 @@ FEATURES :
 INSTALLATION :
 --------------
 In your settings.py :
-- Put `'django_bigbluebutton'` to your INSTALLED_APPS.
+
+- Add `'django_bigbluebutton'` to your INSTALLED_APPS.
 - Add theses lines :
     - `BBB_SECRET = 'your_shared_secret'`
     - `BBB_URL = 'http://your_hostname/bigbluebutton/'`
     - `BBB_LOGOUT_URL = 'http://your_hostname'`
+    - `DJANGO_BBB_BASE_URL = 'meetings'`
 - You also need to configure mail settings, see : https://docs.djangoproject.com/en/dev/topics/email/
+
+In your urls.py :
+
+- Put : `url(r'^{}/'.format(settings.DJANGO_BBB_BASE_URL), include('django_bigbluebutton.urls')),` and make sure it's before : `url(r'^', include('cms.urls')),` if you're using django cms.
