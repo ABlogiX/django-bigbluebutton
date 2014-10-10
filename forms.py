@@ -25,3 +25,6 @@ class RegisteredUserForm(forms.ModelForm):
             'company': forms.TextInput(attrs={'class': 'form-control'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+class SendMailForm(forms.Form):
+    mail_content = forms.CharField(widget=forms.Textarea)
