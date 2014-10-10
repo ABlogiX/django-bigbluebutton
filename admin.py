@@ -3,11 +3,15 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.utils.translation import ugettext as _
 
+from django.contrib.sites.models import Site
+
+from django.shortcuts import render
+
 from django_bigbluebutton.models import Meeting
 from django_bigbluebutton.models import RegisteredUser
 from django_bigbluebutton.models import PreRegisteredUser
 
-from django.contrib.sites.models import Site
+from django_bigbluebutton.forms import SendMailForm
 
 
 class MeetingAdmin(admin.ModelAdmin):
@@ -43,7 +47,18 @@ class MeetingAdmin(admin.ModelAdmin):
     )
 
     def send_inscription_mail(self, request, queryset):
-        for meeting in queryset.filter():
+        form = None
+
+        print(request.POST)
+        if 'send_mail' in request.POST:
+            form = SendMailForm(request.POST)
+
+            if form.is_valid():
+                mail_content = form.cleaned_data['mail_content']
+
+                print(mail_content)
+
+                """for meeting in queryset.filter():
             users = PreRegisteredUser.objects.filter(meetings=meeting)
 
             mails = []
@@ -52,6 +67,11 @@ class MeetingAdmin(admin.ModelAdmin):
                 mails.append(user.mail)
 
             subject = _("Subscription link to the meeting : {}".format(meeting.name))
+
+            send_mail(subject, content, settings.EMAIL_HOST_USER,
+                      mails, fail_silently=False)"""
+
+        for meeting in queryset.filter():
             content = _("Hello,\n"
                         "We send you an email because we think you can be interested "
                         "in this meeting which will be the {}. GMT+1 (Paris time)\n"
@@ -60,9 +80,12 @@ class MeetingAdmin(admin.ModelAdmin):
                         .format(meeting.date, Site.objects.get_current().domain,
                                 settings.DJANGO_BBB_BASE_URL, meeting.unique_id,
                                 settings.DJANGO_BBB_SUBSCRIPTION_URL))
+            break
 
-            send_mail(subject, content, settings.EMAIL_HOST_USER,
-                      mails, fail_silently=False)
+        if not form:
+            form = SendMailForm(initial={'mail_content': content})
+
+        return render(request, 'admin/send_mail.html', {'meetings': queryset, 'mail_form': form})
 
     send_inscription_mail.short_description = _(
         'Send an email to pre-registered users.'
