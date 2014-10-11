@@ -27,4 +27,5 @@ class RegisteredUserForm(forms.ModelForm):
         }
 
 class SendMailForm(forms.Form):
+    _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
     mail_content = forms.CharField(widget=forms.Textarea)
