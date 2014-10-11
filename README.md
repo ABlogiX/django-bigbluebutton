@@ -21,6 +21,9 @@ In your settings.py :
     - `BBB_URL = 'http://your_hostname/bigbluebutton/'`
     - `BBB_LOGOUT_URL = 'http://your_hostname'`
     - `DJANGO_BBB_BASE_URL = 'meetings'`
+    - `DJANGO_BBB_SUBSCRIPTION_URL = 'subscription'`
+    - `DJANGO_BBB_CONNECTION_URL = 'connection'`
+
 - You also need to configure mail settings, see : https://docs.djangoproject.com/en/dev/topics/email/
 
 In your urls.py :
