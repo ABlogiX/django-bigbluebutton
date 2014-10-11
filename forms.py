@@ -25,3 +25,7 @@ class RegisteredUserForm(forms.ModelForm):
             'company': forms.TextInput(attrs={'class': 'form-control'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+class SendMailForm(forms.Form):
+    _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
+    mail_content = forms.CharField(widget=forms.Textarea)

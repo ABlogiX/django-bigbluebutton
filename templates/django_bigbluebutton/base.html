@@ -1,0 +1,21 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'django_bigbluebutton/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'django_bigbluebutton/css/django_bigbluebutton.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script src="{% static 'django_bigbluebutton/js/jquery.min.js' %}"></script>
+    <script src="{% static 'django_bigbluebutton/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

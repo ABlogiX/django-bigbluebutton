@@ -11,7 +11,7 @@ msgstr ""
 "PO-Revision-Date: 2014-10-11 18:52+0100\n"
 "Last-Translator: Alexandre Papin <papin.alexandre@me.com>\n"
 "Language-Team: ABlogiX <LL@li.org>\n"
-"Language: fr_FR\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: admin.py:41
 msgid "Informations for the meeting : {}"
-msgstr "Rejoindre la conférence : {}"
+msgstr ""
 
 #: admin.py:46
 msgid "The confirmation mail was sent."
-msgstr "Le mail de confirmation à été envoyé."
+msgstr ""
 
 #: admin.py:50
 msgid ""
@@ -33,24 +33,18 @@ msgid ""
 "\n"
 "You can join the meeting using this password : {}"
 msgstr ""
-"La conférence démarrera le {} GMT+1 (Heure de Paris).\n"
-"\n"
-"Pour rejoindre la conférence, suivez ce lien : http://{}/{}/{}/{}\n"
-"\n"
-"Vous pouvez rejoindre la conférence en utilisant le mot de passe suivant : {}"
 
 #: admin.py:68
 msgid "Send a mail to selected meeting registered users."
 msgstr ""
-"Envoyer un mail au utilisateurs enregistrés pour la conférence sélectionnée."
 
 #: admin.py:88
 msgid "Subscription link to the meeting : {}"
-msgstr "Lien d'enregistrement à la conférence : {}"
+msgstr ""
 
 #: admin.py:93
 msgid "The pre-registering mail was sent."
-msgstr "Le mail de pré-enregistrement à été envoyé."
+msgstr ""
 
 #: admin.py:97
 msgid ""
@@ -60,194 +54,182 @@ msgid ""
 "If you want to subscribe, follow this link :\n"
 "http://{}/{}/{}/{}\n"
 msgstr ""
-"Bonjour,\n"
-"Nous vous envoyons ce mail car nous pensons que vous serez intéressé pour "
-"cette conférence qui se déroulera le {}. GMT+1 (Heure de Paris)\n"
-"Si vous voulez vous enregistrer, suivez ce lien :\n"
-"http://{}/{}/{}/{}\n"
 
 #: admin.py:115
 msgid "Send a mail to selected meeting pre-registered users."
 msgstr ""
-"Envoyer un mail aux utilisateurs pré-enregistrés pour la conférence "
-"sélectionnée."
 
 #: cms_app.py:7
 msgid "BigBlueButton App"
-msgstr "BigBlueButton App"
+msgstr ""
 
 #: models.py:28
 msgid "name"
-msgstr "nom"
+msgstr ""
 
 #: models.py:29
 msgid "The name of the meeting."
-msgstr "Le nom de la conférence."
+msgstr ""
 
 #: models.py:33
 msgid "Unique number"
-msgstr "Numéro unique"
+msgstr ""
 
 #: models.py:34
 msgid "The meeting number which need to be unique."
-msgstr "Le numéro de la conférence qui doit être unique."
+msgstr ""
 
 #: models.py:38
 msgid "Schedule on"
-msgstr "Programmée le"
+msgstr ""
 
 #: models.py:39
 msgid "The date and time the meeting will be."
-msgstr "Jour et heure de début de la conférence."
+msgstr ""
 
 #: models.py:42
 msgid "Attendee password"
-msgstr "Mot de passe participant"
+msgstr ""
 
 #: models.py:43
 msgid "The password which will sent to attendees."
-msgstr "Le mot de passe qui sera envoyé aux participants."
+msgstr ""
 
 #: models.py:47
 msgid "Moderator password"
-msgstr "Mot de passe modérateur"
+msgstr ""
 
 #: models.py:48
 msgid "The password for meeting's moderator."
-msgstr "Le mot de passe pour le modérateur de la conférence."
+msgstr ""
 
 #: models.py:52
 msgid "Welcome message"
-msgstr "Message d'accueil"
+msgstr ""
 
 #: models.py:53
 msgid "Message which displayed on the chat window."
-msgstr "Le message qui sera affiché dans la fenêtre de tchat."
+msgstr ""
 
 #: models.py:57
 msgid "Logout URL"
-msgstr "URL de déconnexion"
+msgstr ""
 
 #: models.py:58
 msgid "URL to which users will be redirected."
-msgstr "L'URL vers laquelle les utilisateurs seront redirigés."
+msgstr ""
 
 #: models.py:90 models.py:121
 #: templates/django_bigbluebutton/subscription.html:9
 msgid "Mail address"
-msgstr "Adresse mail"
+msgstr ""
 
 #: models.py:91 models.py:122
 msgid "Mail where informations will be sent."
-msgstr "Mail ou les informations seront envoyées."
+msgstr ""
 
 #: models.py:94 templates/django_bigbluebutton/subscription.html:17
 msgid "Last name"
-msgstr "Nom"
+msgstr ""
 
 #: models.py:95
 msgid "Attendee last name."
-msgstr "Nom du participant."
+msgstr ""
 
 #: models.py:98 templates/django_bigbluebutton/subscription.html:25
 msgid "First name"
-msgstr "Prénom"
+msgstr ""
 
 #: models.py:99
 msgid "Attendee first name."
-msgstr "Prénom du participant."
+msgstr ""
 
 #: models.py:102
 msgid "Company name"
-msgstr "Nom de la société"
+msgstr ""
 
 #: models.py:103
 msgid "Attendee company name."
-msgstr "Nom de la société du participant."
+msgstr ""
 
 #: models.py:106 templates/django_bigbluebutton/subscription.html:33
 msgid "Phone number"
-msgstr "Numéro de téléphone"
+msgstr ""
 
 #: models.py:107
 msgid "Attendee phone number."
-msgstr "Numéro de téléphone du participant."
+msgstr ""
 
 #: models.py:112 models.py:127
 msgid "List of meetings that the user is registered."
-msgstr "La liste des conférences auxquelles l'utilisateur est enregistré."
+msgstr ""
 
 #: views.py:95
 msgid "Subscription to the meeting : {}"
-msgstr "État de la conférence : {}"
+msgstr ""
 
 #: views.py:98
 msgid ""
 "Thank you to subscribed to this meetings.\n"
 "You will receive a mail one day before the meeting begins.\n"
 msgstr ""
-"Merci de vous être enregistré à cette conférence.\n"
-"Vous recevrez un mail un jour avant le début de la conférence.\n"
 
 #: templates/admin/send_mail.html:6
 msgid "Customize the content of the mail which will be send."
-msgstr "Personnaliser le contenu du mail qui sera envoyé."
+msgstr ""
 
 #: templates/django_bigbluebutton/connection.html:9
 msgid "Username"
-msgstr "Nom d'utilisateur"
+msgstr ""
 
 #: templates/django_bigbluebutton/connection.html:17
 msgid "Password"
-msgstr "Mot de passe"
+msgstr ""
 
 #: templates/django_bigbluebutton/connection.html:26
 msgid "Wrong password."
-msgstr "Mot de passe erroné."
+msgstr ""
 
 #: templates/django_bigbluebutton/connection.html:30
 msgid "Join"
-msgstr "Rejoindre"
+msgstr ""
 
 #: templates/django_bigbluebutton/meetings.html:7
 msgid "Retrieving the list of meetings : "
-msgstr "Récupération de la liste des conférences : "
+msgstr ""
 
 #: templates/django_bigbluebutton/meetings.html:7
 msgid "Failure"
-msgstr "Echec"
+msgstr ""
 
 #: templates/django_bigbluebutton/meetings.html:11
 msgid "List of meetings"
-msgstr "Liste des conférences"
+msgstr ""
 
 #: templates/django_bigbluebutton/meetings.html:15
 msgid "Name of the meeting"
-msgstr "Nom de la conférence"
+msgstr ""
 
 #: templates/django_bigbluebutton/meetings.html:16
 msgid "State of the meeting"
-msgstr "État de la conférence"
+msgstr ""
 
 #: templates/django_bigbluebutton/meetings.html:20
 msgid "Running"
-msgstr "Démarrée"
+msgstr ""
 
 #: templates/django_bigbluebutton/meetings.html:20
 msgid "Not running"
-msgstr "Non démarrée"
+msgstr ""
 
 #: templates/django_bigbluebutton/meetings.html:26
 msgid "No meeting available."
-msgstr "Pas de conférence disponible."
+msgstr ""
 
 #: templates/django_bigbluebutton/subscription.html:41
 msgid "Company"
-msgstr "Société"
+msgstr ""
 
 #: templates/django_bigbluebutton/subscription.html:48
 msgid "Register"
-msgstr "Enregistrement"
-
-#~ msgid "Register to meeting"
-#~ msgstr "S'enregistrer à la conférence"
+msgstr ""

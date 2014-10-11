@@ -9,6 +9,8 @@ from cms.models import CMSPlugin
 
 from django_bigbluebutton.bbb_api import getMeetings, createMeeting, endMeeting
 
+from random import randrange
+
 
 def delete_meeting_in_bigbluebutton(sender, instance, *args, **kwargs):
     endMeeting(instance.unique_id, instance.moderator_pw,
@@ -19,7 +21,7 @@ class Meeting(models.Model):
 
     def get_unique_id():
         if Meeting.objects.all().count() == 0:
-            return 1
+            return randrange(100000, 1000000)
         else:
             return Meeting.objects.latest('id').unique_id + 1
 
@@ -32,15 +34,19 @@ class Meeting(models.Model):
         help_text=_('The meeting number which need to be unique.'),
         unique=True, default=get_unique_id)
 
+    date = models.DateTimeField(
+        _("Schedule on"),
+        help_text=_("The date and time the meeting will be."))
+
     attendee_pw = models.CharField(
         _('Attendee password'),
         help_text=_('The password which will sent to attendees.'),
-        max_length=50, blank=True)
+        max_length=50, blank=True) # True because bbb will generate one if empty
 
     moderator_pw = models.CharField(
         _('Moderator password'),
         help_text=_("The password for meeting's moderator."),
-        max_length=50, blank=True)
+        max_length=50, blank=True) # True because bbb will generate one if empty
 
     welcome_message = models.CharField(
         _('Welcome message'),
@@ -104,6 +110,22 @@ class RegisteredUser(models.Model):
     meetings = models.ManyToManyField(
         Meeting,
         verbose_name=_('List of meetings that the user is registered.')
+    )
+
+    def __str__(self):
+        return self.mail
+
+
+class PreRegisteredUser(models.Model):
+    mail = models.EmailField(
+        _('Mail address'),
+        help_text=_('Mail where informations will be sent.')
+    )
+
+    meetings = models.ManyToManyField(
+        Meeting,
+        verbose_name=_('List of meetings that the user is registered.'),
+        blank=True
     )
 
     def __str__(self):

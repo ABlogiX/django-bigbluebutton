@@ -14,20 +14,10 @@
             <table align="center" class="table table-striped">
                 <th>{% trans "Name of the meeting" %}</th>
                 <th>{% trans "State of the meeting" %}</th>
-                <th>{% trans "Register" %}</th>
-                <th>{% trans "Join" %}</th>
             {% for meeting in meetings %}
                 <tr>
                     <td>{{ meeting.meetingName }}</td>
                     <td>{% if meeting.running == 'true' %}{% trans "Running" %}{% else %}{% trans "Not running" %}{% endif %}</td>
-                    <td><button type="button" class="btn btn-primary" name="show_subscribe_meeting_form" id="{{ meeting.meetingID }}">{% trans "Register to meeting" %}</button></td>
-                    <td><button type="button" {% if meeting.running == 'true' or user.is_authenticated %}
-                                                    class="btn btn-success" enabled
-                                                {% else %}
-                                                    class="btn btn-default" disabled
-                                                {% endif %}
-                            name="show_join_meeting_form" id="{{ meeting.meetingID }}">{% trans "Join the meeting" %}</button>
-                    </td>
                 </tr>
             {% endfor %}
             </table>
@@ -37,121 +27,4 @@
         {% endif %}
     </fieldset>
 
-    <div class="modal fade" id="modal_subscribe">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">{% trans "Register to meeting" %}</h4>
-                </div>
-                <form action="{% url 'meetings' %}" method="post">{% csrf_token %}
-                    <div class="modal-body">
-	                    <div class="input-group">
-	                      <span class="input-group-addon">{% trans "Mail address" %}</span>
-	                      {{ registered_user_form.mail }}
-	                    </div><br />
-	                    {% if registered_user_form.mail.errors %}
-	                        <div class="alert alert-danger">{{ registered_user_form.mail.errors }}</div>
-	                    {% endif %}
-	                    <div class="input-group">
-	                      <span class="input-group-addon">{% trans "Last name" %}</span>
-	                      {{ registered_user_form.last_name }}
-	                    </div><br />
-	                    {% if registered_user_form.last_name.errors %}
-	                        <div class="alert alert-danger">{{ registered_user_form.last_name.errors }}</div>
-	                    {% endif %}
-	                    <div class="input-group">
-	                      <span class="input-group-addon">{% trans "First name" %}</span>
-	                      {{ registered_user_form.first_name }}
-	                    </div><br />
-	                    {% if registered_user_form.first_name.errors %}
-	                        <div class="alert alert-danger">{{ registered_user_form.first_name.errors }}</div>
-	                    {% endif %}
-	                    <div class="input-group">
-	                      <span class="input-group-addon">{% trans "Phone number" %}</span>
-	                      {{ registered_user_form.phone_number }}
-	                    </div><br />
-	                    {% if registered_user_form.phone_number.errors %}
-	                        <div class="alert alert-danger">{{ registered_user_form.phone_number.errors }}</div>
-	                    {% endif %}
-	                    <div class="input-group">
-	                      <span class="input-group-addon">{% trans "Company" %}</span>
-	                      {{ registered_user_form.company }}
-	                    </div>
-	                    {% if registered_user_form.company.errors %}
-	                        <br />
-	                        <div class="alert alert-danger">{{ registered_user_form.company.errors }}</div>
-	                    {% endif %}
-	                    <input type="text" id="meeting_id_subscribe" name="meeting_id" hidden />
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" name="subscribe_meeting" class="btn btn-primary">{% trans "Register" %}</button>
-                    </div>
-                </form>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    
-    <div class="modal fade" id="modal_join">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">{% trans "Join the meeting" %}</h4>
-                </div>
-                <form action="{% url 'meetings' %}" method="post">{% csrf_token %}
-                    <div class="modal-body">
-	                    <div class="input-group">
-	                      <span class="input-group-addon">{% trans "Username" %}</span>
-	                      {{ join_meeting_form.username }}
-	                    </div><br />
-	                    {% if join_meeting_form.username.errors %}
-	                        <div class="alert alert-danger">{{ join_meeting_form.username.errors }}</div>
-	                    {% endif %}
-	                    <div class="input-group">
-	                      <span class="input-group-addon">{% trans "Password" %}</span>
-	                      {{ join_meeting_form.password }}
-	                    </div>
-	                    {% if join_meeting_form.password.errors %}
-	                        <br />
-	                        <div class="alert alert-danger">{{ join_meeting_form.password.errors }}</div>
-	                    {% endif %}
-	                    {% if wrong_password %}
-                            <br />
-                            <div class="alert alert-danger">{% trans "Wrong password." %}</div>
-                        {% endif %}
-	                    <input type="text" id="meeting_id_join" name="meeting_id" hidden />
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" name="join_meeting" class="btn btn-primary">{% trans "Join" %}</button>
-                    </div>
-                </form>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-{% endblock %}
-
-{% block extra_js %}
-    <script>
-        jQuery(document).ready(function ()
-        {
-            jQuery("[name='show_subscribe_meeting_form']").click(function() {
-                jQuery("#modal_subscribe").modal('show');
-                jQuery("#meeting_id_subscribe").val(jQuery(this).attr("id"));
-           });
-            
-            jQuery("[name='show_join_meeting_form']").click(function() {
-                jQuery("#modal_join").modal('show');
-                jQuery("#meeting_id_join").val(jQuery(this).attr("id"));
-           });
-            
-           {% if join_meeting_form.errors or wrong_password %}
-               jQuery("#modal_join").modal('show');
-           {% endif %}
-           {% if registered_user_form.errors %}
-               jQuery("#modal_subscribe").modal('show');
-           {% endif %}
-        });
-    </script>
 {% endblock %}

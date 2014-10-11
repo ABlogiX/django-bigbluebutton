@@ -1,0 +1,34 @@
+{% extends 'django_bigbluebutton/base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form action="{% url 'meeting_connection' meeting_id %}" method="post">{% csrf_token %}
+                <div class="input-group">
+                    <span class="input-group-addon">{% trans "Username" %}</span>
+                    {{ join_meeting_form.username }}
+                    {% if join_meeting_form.username.errors %}
+                        <span class="input-group-addon error">{{ join_meeting_form.username.errors }}</span>
+                    {% endif %}
+                </div><br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">{% trans "Password" %}</span>
+                    {{ join_meeting_form.password }}
+                    {% if join_meeting_form.password.errors %}
+                        <span class="input-group-addon error">{{ join_meeting_form.password.errors }}</span>
+                    {% endif %}
+                </div><br />
+
+                {% if wrong_password %}
+                    <br />
+                    <div class="alert alert-danger">{% trans "Wrong password." %}</div>
+                {% endif %}
+                <input type="text" id="meeting_id_join" name="meeting_id" hidden />
+
+                <button type="submit" name="join_meeting" class="btn btn-primary">{% trans "Join" %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

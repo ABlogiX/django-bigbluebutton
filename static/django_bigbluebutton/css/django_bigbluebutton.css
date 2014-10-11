@@ -1,0 +1,8 @@
+.error {
+    color: #ff0e22;
+    box-sizing: content-box;
+}
+
+.error ul {
+    list-style-type: none;
+}

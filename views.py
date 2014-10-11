@@ -11,8 +11,6 @@ from django_bigbluebutton.models import RegisteredUser, Meeting
 
 class MeetingsView(View):
     template_name = 'django_bigbluebutton/meetings.html'
-    secret = settings.BBB_SECRET
-    url = settings.BBB_URL
 
     def get(self, request):
         join_meeting_form = JoinMeetingForm()
@@ -22,7 +20,7 @@ class MeetingsView(View):
         is_meetings = False
         meetings = []
 
-        list_meetings = getMeetings(self.url, self.secret)
+        list_meetings = getMeetings(settings.BBB_URL, settings.BBB_SECRET)
 
         if list_meetings is not None:
             return_code = list_meetings['returncode']
@@ -36,67 +34,13 @@ class MeetingsView(View):
     def post(self, request):
         wrong_password = False
 
-        if 'join_meeting' in request.POST:
-            join_meeting_form = JoinMeetingForm(request.POST)
-            registered_user_form = RegisteredUserForm()
 
-            if join_meeting_form.is_valid() and request.POST['meeting_id']:
-                username = join_meeting_form.cleaned_data['username']
-                password = join_meeting_form.cleaned_data['password']
-                meeting_id = request.POST['meeting_id']
-
-                meeting = Meeting.objects.get(unique_id=meeting_id)
-
-                if meeting.attendee_pw == password or meeting.moderator_pw == password:
-                    meeting_url = joinMeetingURL(meeting_id, username,
-                                                 password, self.url,
-                                                 self.secret)
-                    return redirect(meeting_url)
-
-                else:
-                    wrong_password = True
-
-        if 'subscribe_meeting' in request.POST:
-            registered_user_form = RegisteredUserForm(request.POST)
-            join_meeting_form = JoinMeetingForm()
-
-            if registered_user_form.is_valid() and request.POST['meeting_id']:
-                mail = registered_user_form.cleaned_data['mail']
-                last_name = registered_user_form.cleaned_data['last_name']
-                first_name = registered_user_form.cleaned_data['first_name']
-                company = registered_user_form.cleaned_data['company']
-                phone_number = registered_user_form.cleaned_data['phone_number']
-                meeting_id = request.POST['meeting_id']
-
-                try:
-                    user = RegisteredUser.objects.get(mail=mail)
-                    user.meetings.add(
-                        Meeting.objects.get(unique_id=int(meeting_id))
-                    )
-
-                except RegisteredUser.DoesNotExist:
-                    user = RegisteredUser(mail=mail, last_name=last_name,
-                                          first_name=first_name,
-                                          company=company,
-                                          phone_number=phone_number)
-                    user.save()
-                    user.meetings.add(
-                        Meeting.objects.get(unique_id=int(meeting_id))
-                    )
-
-                subject = _('Inscription à la conférence : ')
-                subject += Meeting.objects.get(unique_id=int(meeting_id)).name
-                content = _('Merci de vous être inscrit à cette conférence. ')
-                content += _('Vous serez informé par mail 24h avant le début de celle-ci.')
-
-                send_mail(subject, content, 'alexandre.papin72@gmail.com',
-                          [user.mail, ], fail_silently=False)
 
         return_code = 'ERROR'
         is_meetings = False
         meetings = []
 
-        list_meetings = getMeetings(self.url, self.secret)
+        list_meetings = getMeetings(settings.BBB_URL, settings.BBB_SECRET)
 
         if list_meetings is not None:
             return_code = list_meetings['returncode']
@@ -104,5 +48,92 @@ class MeetingsView(View):
             if list_meetings['meetings'] is not None:
                 meetings = list(list_meetings['meetings'].values())
                 is_meetings = True
+
+        return render(request, self.template_name, locals())
+
+
+class MeetingSubscriptionView(View):
+    template_name = 'django_bigbluebutton/subscription.html'
+
+    def get(self, request, *args):
+        # Get the meeting ID in the URL
+        meeting_id = args[0]
+
+        registered_user_form = RegisteredUserForm()
+
+        return render(request, self.template_name, locals())
+
+    def post(self, request, *args):
+        # Get the meeting ID in the URL
+        meeting_id = args[0]
+
+        registered_user_form = RegisteredUserForm(request.POST)
+
+        if registered_user_form.is_valid():
+            mail = registered_user_form.cleaned_data['mail']
+            last_name = registered_user_form.cleaned_data['last_name']
+            first_name = registered_user_form.cleaned_data['first_name']
+            company = registered_user_form.cleaned_data['company']
+            phone_number = registered_user_form.cleaned_data['phone_number']
+
+            try:
+                user = RegisteredUser.objects.get(mail=mail)
+                user.meetings.add(
+                    Meeting.objects.get(unique_id=int(meeting_id))
+                )
+
+            except RegisteredUser.DoesNotExist:
+                user = RegisteredUser(mail=mail, last_name=last_name,
+                                      first_name=first_name,
+                                      company=company,
+                                      phone_number=phone_number)
+                user.save()
+                user.meetings.add(
+                    Meeting.objects.get(unique_id=int(meeting_id))
+                )
+
+            subject = _("Subscription to the meeting : {}"
+                        .format(Meeting.objects.get(unique_id=int(meeting_id)).name))
+
+            content = _("Thank you to subscribed to this meetings.\n"
+                        "You will receive a mail one day before the meeting begins.\n")
+
+            send_mail(subject, content, settings.EMAIL_HOST_USER,
+                      [user.mail, ], fail_silently=False)
+
+        return render(request, self.template_name, locals())
+
+
+class MeetingConnectionView(View):
+    template_name = 'django_bigbluebutton/connection.html'
+
+    def get(self, request, *args):
+        # Get the meeting ID in the URL
+        meeting_id = args[0]
+
+        join_meeting_form = JoinMeetingForm()
+
+        return render(request, self.template_name, locals())
+
+    def post(self, request, *args):
+        # Get the meeting ID in the URL
+        meeting_id = args[0]
+
+        join_meeting_form = JoinMeetingForm(request.POST)
+
+        if join_meeting_form.is_valid():
+            username = join_meeting_form.cleaned_data['username']
+            password = join_meeting_form.cleaned_data['password']
+
+            meeting = Meeting.objects.get(unique_id=meeting_id)
+
+            if meeting.attendee_pw == password or meeting.moderator_pw == password:
+                meeting_url = joinMeetingURL(meeting_id, username,
+                                             password, settings.BBB_URL,
+                                             settings.BBB_SECRET)
+                return redirect(meeting_url)
+
+            else:
+                wrong_password = True
 
         return render(request, self.template_name, locals())
