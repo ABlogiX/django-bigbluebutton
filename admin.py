@@ -40,7 +40,7 @@ class MeetingAdmin(admin.ModelAdmin):
 
                     subject = _("Informations for the meeting : {}".format(meeting.name))
 
-                    send_mail(subject, content, settings.EMAIL_HOST_USER,
+                    send_mail(subject, mail_content, settings.EMAIL_HOST_USER,
                               mails, fail_silently=False)
 
                     self.message_user(request, _("The confirmation mail was sent."))
