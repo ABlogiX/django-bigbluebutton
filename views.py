@@ -96,8 +96,7 @@ class MeetingSubscriptionView(View):
                         .format(Meeting.objects.get(unique_id=int(meeting_id)).name))
 
             content = _("Thank you to subscribed to this meetings.\n"
-                        "You will receive a mail one day before the meeting begins.\n\n"
-                        "The ABlogiX team.")
+                        "You will receive a mail one day before the meeting begins.\n")
 
             send_mail(subject, content, settings.EMAIL_HOST_USER,
                       [user.mail, ], fail_silently=False)
